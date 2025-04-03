@@ -1,4 +1,3 @@
-console.log(">>>>>SHITHEADS<<<<<<");
 const ATTACK_VALUE = 10;
 const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
@@ -22,7 +21,17 @@ function getMaxLifeValues() {
   return parsedValue;
 }
 
-let chosenMaxLife = getMaxLifeValues();
+let chosenMaxLife;
+
+try {
+  chosenMaxLife = getMaxLifeValues();
+} catch (error) {
+  console.log(error)
+  chosenMaxLife = 100;
+  alert('You entered something incorrectly. 100 was used.')
+} finally {
+  
+}
 
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
