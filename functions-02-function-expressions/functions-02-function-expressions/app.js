@@ -53,41 +53,62 @@ startGameBtn.addEventListener("click", () => {
   } else {
     winner = getWinner(computerSelection);
   }
-  let message = `You picked ${playerSelection || DEFAULT_USER_CHOICE}, computer picked ${computerSelection}. `
+  let message = `You picked ${playerSelection || DEFAULT_USER_CHOICE}, computer picked ${computerSelection}. `;
   if (winner === RESULT_DRAW) {
-    message = message += "It's a draw."
+    message = message += "It's a draw.";
   } else if (winner === RESULT_PLAYER_WINS) {
-    message = message += "You win!"
+    message = message += "You win!";
   } else if (winner == RESULT_COMPUTER_WINS) {
-    message += "Computer wins."
+    message += "Computer wins.";
   }
   alert(message);
   gameisRunning = false;
 });
 
-
-const sumUp = (resultHandler, ...numbers) => {
+const combine = (resultHandler, operation, ...numbers) => {
   const validateNumber = (number) => {
     return isNaN(number) ? 0 : number;
-  }
+  };
   let sum = 0;
   for (const num of numbers) {
-    sum += validateNumber(num);
+    if (operation === "ADD") {
+      sum += validateNumber(num);
+    } else {
+      sum -= validateNumber(num);
+    }
   }
   resultHandler(sum);
-}
+};
 
-const subtractUp = (resultHandler, ...numbers) => {
-  let sum = 0;
-  for (const num of numbers) {
-    sum -= num;
-  }
-  resultHandler(sum);
-}
+// const subtractUp = (resultHandler, ...numbers) => {
+//   let sum = 0;
+//   for (const num of numbers) {
+//     sum -= num;
+//   }
+//   resultHandler(sum);
+// }
 
-const showResult = (result) => {
-  alert('The result after adding all numbers is: ' + result);
-}
+const showResult = (messageText, result) => {
+  alert(messageText + " " + result);
+};
 
-sumUp(showResult, 1, 4, 15, "cat", -3, 10);
-subtractUp(showResult, 1, 4, 15, -3, 10);
+combine(
+  showResult.bind(this, "The result after adding all numbers is:"),
+  "ADD",
+  1,
+  4,
+  15,
+  "cat",
+  -3,
+  10,
+);
+combine(
+  showResult.bind(this, "The result after subtracting all numbers is:"),
+  "SUBTRACT",
+  1,
+  4,
+  15,
+  -3,
+  10,
+);
+
